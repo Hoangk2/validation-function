@@ -111,3 +111,54 @@ console.log(isFunction(sum)); //true
 console.log(isFunction(minus)); //true
 
 
+//Hàm welcomeUser
+function welcomeUser(name) { //Toán tử 3 ngôi, điều kiện đúng trả về giá trị đầu tiên, sai trả về giá trị thứ 2
+    return isString(name) ? `Chào mừng ${name}` : "Tên không hợp lệ";
+};
+console.log(welcomeUser("Nguyễn Chí Thanh")); //Chào mừng Nguyễn Chí Thanh
+console.log(welcomeUser(1)); //Tên không hợp lệ
+console.log(welcomeUser(" ")); //Tên không hợp lệ
+
+//Hàm calculateAge
+function calculateAge(currentYear, birthYear) {
+    if(isNumber(currentYear) && isNumber(birthYear)) {
+        return currentYear - birthYear;
+    };
+    return 1;
+};
+console.log(calculateAge(2025, 2012)); //13
+console.log(calculateAge("2025", 2012)); //1
+
+//Hàm getElementAtIndex
+function getElementAtIndex(array, index) {
+    let valueNotArray = !isArray(array);
+    let valueNotNumber = !isNumber(index);
+    if(!valueNotArray) {
+        arrayLength = array.length;
+    };
+    if(valueNotArray || valueNotNumber || index < 0 || index >= arrayLength) {
+        return null;
+    };
+    return array[index];
+};
+
+console.log(getElementAtIndex([1,2,3], 2)); //3
+console.log(getElementAtIndex("b", 2)); //null
+console.log(getElementAtIndex(null, 2)); //null
+console.log(getElementAtIndex(undefined, 2)); //null
+
+//Hàm checkEmpty
+function checkEmpty(value) {
+    let valueNull = isNull(value);
+    let valueUndefined = isUndefined(value);
+    if(valueNull || valueUndefined) {
+        return "Trống";
+    };
+    return "Không trống";
+};
+console.log(checkEmpty(null)); //Trống
+console.log(checkEmpty(undefined)); //Trống
+console.log(checkEmpty("undefined")); //Không trống
+console.log(checkEmpty(1)); //Không trống
+console.log(checkEmpty(1n)); //Không trống
+console.log(checkEmpty("   ")); //Không trống
