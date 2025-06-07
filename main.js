@@ -162,3 +162,70 @@ console.log(checkEmpty("undefined")); //Không trống
 console.log(checkEmpty(1)); //Không trống
 console.log(checkEmpty(1n)); //Không trống
 console.log(checkEmpty("   ")); //Không trống
+
+
+//Hàm convertDatatype
+function convertDatatype(value, type) {
+    switch (type){
+        case "number":
+            value = Number(value);
+            break;
+        case "string":
+            value = String(value);
+            break;
+        case "boolean":
+            value = Boolean(value);
+            break;
+        default:
+            value = "Invalid type";
+    };
+    return value;
+};
+console.log("Kiểm tra hàm convertDatatype: ");
+console.log(convertDatatype(123, "boolean")); //true
+console.log(convertDatatype(123, "undefined")); //Invalid type
+console.log(convertDatatype("abc", "boolean")); // true
+console.log(convertDatatype("123", "number")); //123
+console.log(convertDatatype("two", "number")); //NaN
+console.log(convertDatatype("undefined", "number")); //NaN
+
+//Hàm calculate 
+function calculate(a, b, operator) {
+    let result;
+    a = convertDatatype(a, "number");
+    b = convertDatatype(b, "number");
+
+    if(!isNaN(a) && !isNaN(b)) { //Không dùng toán tử so sánh !== vì NaN không bằng bất kỳ giá trị nào kể cả chính nó
+        switch (operator) {
+            case "add":
+                result = a + b;
+                break;
+            case "subtract":
+                result = a - b;
+                break;
+            case "multiply":
+                result = a * b;
+                break;
+            case "divide":
+                if(b != 0) {
+                    result = a / b;
+                } else {
+                    result = "Cannot divide by zero";
+                };
+                break;
+            default:
+                result = "Invalid operator";
+        };
+    } else {
+        result = "Invalid input number";
+    };
+
+    return result;
+};
+console.log("Kiểm tra hàm calculate");
+console.log(calculate(1, 2, "add")); //3
+console.log(calculate(1, 0, "divide")); //Cannot divide by zero
+console.log(calculate(1, "2", "subtract")); -1
+console.log(calculate("1", 2, "add")); //3
+console.log(calculate(1, 2, "sqrt")); //Invalid operator
+console.log(calculate("ones", "two", "add")); //Invalid input number
